@@ -1,0 +1,39 @@
+<html>
+<span id="counter"></span>/<span id="counter_max"></span>
+<h1 id="word"></h1>
+<input id="input" type="text" />
+<script type="text/javascript">
+var state = {
+    words: ['hello','goodbye','last'],
+    current_word_index: 0,
+    input: ''
+}
+var dom = {
+    counter: document.getElementById('counter'),
+    counter_max: document.getElementById('counter_max'),
+    word: document.getElementById('word'),
+    input: document.getElementById('input')
+}
+function render(){
+    dom.counter.innerHTML = state.current_word_index + 1
+    dom.counter_max.innerHTML = state.words.length
+    dom.word.innerHTML = state.words[state.current_word_index]
+}
+dom.input.onkeyup = function(event){
+    var word = this.value 
+    if(word === state.words[state.current_word_index]){
+        this.value = '';
+        next_word()
+    }
+}
+function next_word(){
+    if(state.words[state.current_word_index + 1]){
+        state.current_word_index++
+    } else {
+        console.log('finished')
+    }
+    render()
+}
+render()
+</script>
+<html>
